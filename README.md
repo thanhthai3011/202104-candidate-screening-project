@@ -3,6 +3,11 @@
 In order to be selected to the next round of the interview process, the candidate needs to complete 
 this project with the following requirements. 
 
+## Feature Requirements
+Follow this tutorial to create a todo application: https://www.educative.io/blog/react-hooks-tutorial-todo-list.
+Add an ability to create a due date for each task. The end user should be able to pick or enter
+a date for each todo item. Show off your design skill to make it easy and intuitive for user to use your app
+
 ## Technical Requirements
 1. Fork this project to your account in Github, 
    for example (https://github.com/your-username/202104-candidate-screening-project)
@@ -16,12 +21,8 @@ this project with the following requirements.
 1. Integrate https://material-ui.com/ to this project and use it as the UI framework
 1. Using jest (according to this tutorial: https://jestjs.io/docs/tutorial-react) to write unit tests (only snapshot 
    testing is required) for your application and ensure 100% code coverage
-
-## Feature Requirements
-Follow this tutorial to create a todo application: https://www.educative.io/blog/react-hooks-tutorial-todo-list. 
-Add an ability to create a due date for each task. The end user should be able to pick or enter 
-a date for each todo item. Show off your design skill to make it easy and intuitive for user to use your app
-
+1. Integrate Testcafe from https://testcafe.io/ and write the automation test cases to test 
+your application. Make sure that you write all test cases to cover the entire functionalities.
 
 ## Evaluation Factors
 The most importance judging factors is on top. 
@@ -31,5 +32,4 @@ The most importance judging factors is on top.
 1. Free of ESLint errors and Google Chrome (or Firefox) Devtool errors / warnings
 1. Clean code, proper naming conventions, show off your skills in writing a readable code
 1. Use of react hooks as described in this page: https://reactjs.org/docs/hooks-overview.html
- 
-
+1. All scenarios are covered by your unit test cases and your automation.
