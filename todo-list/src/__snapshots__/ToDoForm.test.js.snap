@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[` 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <input
+    onChange={[Function]}
+    placeholder="Enter task..."
+    type="text"
+    value=""
+  />
+  <button>
+    Submit
+  </button>
+</form>
+`;
+
+exports[`To Do List 1`] = `
+<header>
+  <h1>
+    To Do List
+  </h1>
+</header>
+`;
