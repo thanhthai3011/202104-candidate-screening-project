@@ -5,6 +5,7 @@ import data from "./data.json";
 import Header from "./Header";
 import ToDoList from "./ToDoList";
 import ToDoForm from './ToDoForm';
+import DatePicker from './DateTimePicker';
 
 function App() {
   
@@ -34,6 +35,7 @@ function App() {
     <div className="App">
       <Header />
       <ToDoList toDoList={toDoList} handleToggle={handleToggle} handleFilter={handleFilter}/>
+      <DatePicker/>
       <ToDoForm addTask={addTask}/>
     </div>
   );
