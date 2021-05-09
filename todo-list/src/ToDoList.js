@@ -1,17 +1,28 @@
 import React from 'react';
-import ToDo from './ToDo';
+import PropTypes from 'prop-types';
+import ToDo from "./ToDo";
 
-const ToDoList = ({toDoList, handleToggle, handleFilter}) => {
+function ToDoList({ items, completeItem }) {
+    if (items.length === 0) {
+        return (
+            <div className="alert alert-success" role="alert">
+                Congratulations your todo list is empty!
+            </div>
+        );
+    }
     return (
-        <div>
-            {toDoList.map(todo => {
-                return (
-                    <ToDo todo={todo} handleToggle={handleToggle} handleFilter={handleFilter}/>
-                )
-            })}
-            <button style={{margin: '20px'}} onClick={handleFilter}>Clear Completed</button>
-        </div>
+        <ul className="list-group">
+            {items.map(item => (
+                <ToDo key={item.id} item={item} completeItem={() => completeItem(item.id)} />
+            ))}
+        </ul>
     );
+}
+
+ToDoList.propTypes = {
+    items: PropTypes.array.isRequired,
+    completeItem: PropTypes.func.isRequired,
 };
+
 
 export default ToDoList;

@@ -1,44 +1,57 @@
-import React, { useState } from 'react';
-//mock data
-import data from "./data.json";
-//components
+import React from "react";
 import Header from "./Header";
 import ToDoList from "./ToDoList";
-import ToDoForm from './ToDoForm';
-import DatePicker from './DateTimePicker';
+import "./App.css";
+import isOverdue from "./isOverdue";
+import todoApi from "./todoApi";
+
+const defaultFilter = { overdueOnly: false, includeComplete: false };
 
 function App() {
-  
-  const [ toDoList, setToDoList ] = useState(data);
+    const [items, setItems] = React.useState([]);
+    const [filter, setFilter] = React.useState(defaultFilter);
+    const [loading, setLoading] = React.useState(true);
 
-  const handleToggle = (id) => {
-    let mapped = toDoList.map(task => {
-      return task.id === Number(id) ? { ...task, complete: !task.complete } : { ...task};
-    });
-    setToDoList(mapped);
-  }
+    const loadItems = async () => {
+        setLoading(true);
+        const todoItems = await todoApi.get();
+        setItems(todoItems);
+        setLoading(false);
+    };
 
-  const handleFilter = () => {
-    let filtered = toDoList.filter(task => {
-      return !task.complete;
-    });
-    setToDoList(filtered);
-  }
+    React.useEffect(() => {
+        loadItems();
+    }, []);
 
-  const addTask = (userInput ) => {
-    let copy = [...toDoList];
-    copy = [...copy, { id: toDoList.length + 1, task: userInput, complete: false }];
-    setToDoList(copy);
-  }
+    const complete = async id => {
+        const updatedItems = await todoApi.complete(id);
+        setItems(updatedItems);
+    };
 
-  return (
-    <div className="App">
-      <Header />
-      <ToDoList toDoList={toDoList} handleToggle={handleToggle} handleFilter={handleFilter}/>
-      <DatePicker/>
-      <ToDoForm addTask={addTask}/>
-    </div>
-  );
+    const add = async item => {
+        const updatedItems = await todoApi.add(item);
+        setItems(updatedItems);
+    };
+
+    const filteredItems = items.filter(
+        item => (filter.includeComplete || !item.complete) && (!filter.overdueOnly || isOverdue(item)),
+    );
+
+    return (
+        <div className="fluid-container app-container">
+            <Header addItem={add} filter={filter} setFilter={setFilter} />
+            {!loading && (
+                <div className="list">
+                    <ToDoList items={filteredItems} completeItem={complete} />
+                </div>
+            )}
+            {loading && (
+                <div className="alert alert-info" role="alert">
+                    Loading please wait...
+                </div>
+            )}
+        </div>
+    );
 }
 
 export default App;

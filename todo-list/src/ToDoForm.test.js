@@ -11,14 +11,10 @@ test('', () => {
   expect(tree).toMatchSnapshot();
 
   // manually trigger the callback
-  tree.props.handleChange();
+  tree.props.addItem();
   // re-rendering
   tree = component.toJSON();
   expect(tree).toMatchSnapshot();
 
-  // manually trigger the callback
-  tree.props.handleSubmit();
-  // re-rendering
-  tree = component.toJSON();
-  expect(tree).toMatchSnapshot();
+
 });

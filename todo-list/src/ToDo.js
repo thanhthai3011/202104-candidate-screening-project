@@ -1,17 +1,30 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
+import dateformat from "dateformat";
+import isOverdue from "./isOverdue";
 
-const ToDo = ({todo, handleToggle}) => {
-
-    const handleClick = (e) => {
-        e.preventDefault()
-        handleToggle(e.currentTarget.id)
-    }
-
+function ToDo({ item, completeItem }) {
+    const itemClass = `list-group-item list-group-item-${isOverdue(item) ? "danger" : "info"}`;
     return (
-        <div id={todo.id} key={todo.id + todo.task} name="todo" value={todo.id} onClick={handleClick} className={todo.complete ? "todo strike" : "todo"}>
-            {todo.task}
-        </div>
+        <li className={itemClass}>
+            <div className="item">
+                <span className={`item-title${item.complete ? " complete-item" : ""}`}>
+                    <i className={isOverdue(item) ? "fas fa-exclamation-circle" : ""} />
+                    {`${item.name} - ${dateformat(new Date(item.timestampDue), "dd-mmm-yyyy")}`}
+                </span>
+                {!item.complete && (
+                    <button type="button" className="btn btn-link" onClick={completeItem}>
+                        Complete item
+                    </button>
+                )}
+            </div>
+        </li>
     );
+}
+
+ToDo.propTypes = {
+    item: PropTypes.object.isRequired,
+    completeItem: PropTypes.func.isRequired,
 };
 
 export default ToDo;

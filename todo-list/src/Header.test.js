@@ -4,7 +4,7 @@ import Header from "./Header";
 
 test('', () => {
   const component = renderer.create(
-    <Header />,
+    <Header />
   );
 
   let tree = component.toJSON();
